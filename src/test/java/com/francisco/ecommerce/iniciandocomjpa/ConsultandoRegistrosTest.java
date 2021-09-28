@@ -1,12 +1,15 @@
 package com.francisco.ecommerce.iniciandocomjpa;
 
+import com.francisco.ecommerce.model.Produto;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ConsultandoRegistrosTest {
 
@@ -32,5 +35,24 @@ public class ConsultandoRegistrosTest {
   @AfterEach
   public void tearDown() {
     entityManager.close();
+  }
+
+  @Test
+  public void buscarPorIdentificador() {
+    Produto produto = entityManager.find(Produto.class, 1);
+//    Produto produto = entityManager.getReference(Produto.class, 1);
+
+    Assertions.assertNotNull(produto);
+    Assertions.assertEquals("Kindle", produto.getNome());
+  }
+
+  @Test
+  public void atualizandoAReferencia() {
+    Produto produto = entityManager.find(Produto.class, 1);
+    produto.setNome("Microfone Samson");
+
+    entityManager.refresh(produto);
+
+    Assertions.assertEquals("Kindle", produto.getNome());
   }
 }
