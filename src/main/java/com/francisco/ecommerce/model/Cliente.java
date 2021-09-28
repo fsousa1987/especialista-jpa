@@ -3,6 +3,7 @@ package com.francisco.ecommerce.model;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.Hibernate;
@@ -10,6 +11,7 @@ import org.hibernate.Hibernate;
 @Getter
 @Setter
 @Entity
+@Table(name = "cliente")
 public class Cliente {
 
   @Id
