@@ -1,38 +1,41 @@
 package com.francisco.ecommerce.model;
 
-import java.util.Objects;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.Hibernate;
 
 @Getter
 @Setter
 @Entity
-public class Cliente {
+public class NotaFiscal {
 
   @Id
   private Integer id;
 
-  private String nome;
+  private Integer pedidoId;
 
-  private SexoCliente sexo;
+  private String xml;
+
+  private Date dataEmissao;
 
   @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
-    if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+    if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Cliente cliente = (Cliente) o;
-    return Objects.equals(id, cliente.id);
+
+    NotaFiscal that = (NotaFiscal) o;
+
+    return id.equals(that.id);
   }
 
   @Override
   public int hashCode() {
-    return 0;
+    return id.hashCode();
   }
 }
