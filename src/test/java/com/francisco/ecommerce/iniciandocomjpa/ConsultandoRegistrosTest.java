@@ -1,41 +1,11 @@
 package com.francisco.ecommerce.iniciandocomjpa;
 
+import com.francisco.ecommerce.EntityManagerTest;
 import com.francisco.ecommerce.model.Produto;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class ConsultandoRegistrosTest {
-
-  private static EntityManagerFactory entityManagerFactory;
-
-  private EntityManager entityManager;
-
-  @BeforeAll
-  public static void setUpBeforeClass() {
-    entityManagerFactory = Persistence.createEntityManagerFactory("Ecommerce-PU");
-  }
-
-  @AfterAll
-  public static void tearDownAfterClass() {
-    entityManagerFactory.close();
-  }
-
-  @BeforeEach
-  public void setUp() {
-    entityManager = entityManagerFactory.createEntityManager();
-  }
-
-  @AfterEach
-  public void tearDown() {
-    entityManager.close();
-  }
+public class ConsultandoRegistrosTest extends EntityManagerTest {
 
   @Test
   public void buscarPorIdentificador() {
