@@ -2,6 +2,8 @@ package com.francisco.ecommerce.model;
 
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Getter;
@@ -19,6 +21,7 @@ public class Cliente {
 
   private String nome;
 
+  @Enumerated(EnumType.STRING)
   private SexoCliente sexo;
 
   @Override
