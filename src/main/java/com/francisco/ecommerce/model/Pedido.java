@@ -10,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +25,10 @@ public class Pedido {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
+
+  @ManyToOne
+  @JoinColumn(name = "cliente_id")
+  private Cliente cliente;
 
   @Column(name = "data_pedido")
   private LocalDateTime dataPedido;
