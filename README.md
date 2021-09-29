@@ -11,3 +11,4 @@
 ## Conteúdo programático (Atualizado periodicamente)
 
 - Iniciando com JPA
+- Mapeamento básico
