@@ -1,10 +1,13 @@
 package com.francisco.ecommerce.model;
 
-import javax.persistence.Column;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,8 +24,12 @@ public class Categoria {
 
   private String nome;
 
-  @Column(name = "categoria_pai_id")
-  private Integer categoriaPaiId;
+  @ManyToOne
+  @JoinColumn(name = "categoria_pai_id")
+  private Categoria categoriaPai;
+
+  @OneToMany(mappedBy = "categoriaPai")
+  private List<Categoria> categorias;
 
   @Override
   public boolean equals(Object o) {
