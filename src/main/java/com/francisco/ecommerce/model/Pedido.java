@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -48,6 +49,9 @@ public class Pedido {
 
   @Enumerated(EnumType.STRING)
   private StatusPedido status;
+
+  @OneToOne(mappedBy = "pedido")
+  private PagamentoCartao pagamento;
 
   @Embedded
   private EnderecoEntregaPedido enderecoEntrega;
