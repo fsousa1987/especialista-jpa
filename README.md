@@ -13,3 +13,4 @@
 - Iniciando com JPA
 - Mapeamento básico
 - Mapeamento de relacionamentos
+- Conhecendo o EntityManager

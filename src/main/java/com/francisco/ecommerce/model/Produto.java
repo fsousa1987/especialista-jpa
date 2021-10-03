@@ -1,8 +1,10 @@
 package com.francisco.ecommerce.model;
 
+import com.francisco.ecommerce.listener.GenericoListener;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +18,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@EntityListeners({ GenericoListener.class})
 @Entity
 @Table(name = "produto")
 public class Produto {

@@ -1,11 +1,14 @@
 package com.francisco.ecommerce.model;
 
+import com.francisco.ecommerce.listener.GenericoListener;
+import com.francisco.ecommerce.listener.GerarNotaFiscalListener;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -28,6 +31,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@EntityListeners({ GerarNotaFiscalListener.class, GenericoListener.class})
 @Entity
 @Table(name = "pedido")
 public class Pedido {
@@ -65,6 +69,10 @@ public class Pedido {
 
   @Embedded
   private EnderecoEntregaPedido enderecoEntrega;
+
+  public boolean isPago() {
+    return StatusPedido.PAGO.equals(status);
+  }
 
 //  @PrePersist
 //  @PreUpdate
