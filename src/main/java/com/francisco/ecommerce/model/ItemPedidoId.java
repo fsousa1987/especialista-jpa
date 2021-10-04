@@ -1,6 +1,8 @@
 package com.francisco.ecommerce.model;
 
 import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,10 +12,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Embeddable
 public class ItemPedidoId implements Serializable {
 
+  @Column(name = "pedido_id")
   private Integer pedidoId;
 
+  @Column(name = "produto_id")
   private Integer produtoId;
 
   @Override
