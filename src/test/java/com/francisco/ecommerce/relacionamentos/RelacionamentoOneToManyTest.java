@@ -3,6 +3,7 @@ package com.francisco.ecommerce.relacionamentos;
 import com.francisco.ecommerce.EntityManagerTest;
 import com.francisco.ecommerce.model.Cliente;
 import com.francisco.ecommerce.model.ItemPedido;
+import com.francisco.ecommerce.model.ItemPedidoId;
 import com.francisco.ecommerce.model.Pedido;
 import com.francisco.ecommerce.model.Produto;
 import com.francisco.ecommerce.model.StatusPedido;
@@ -46,6 +47,7 @@ public class RelacionamentoOneToManyTest extends EntityManagerTest {
     pedido.setCliente(cliente);
 
     ItemPedido itemPedido = new ItemPedido();
+    itemPedido.setId(new ItemPedidoId());
     itemPedido.setPrecoProduto(produto.getPreco());
     itemPedido.setQuantidade(1);
     itemPedido.setPedido(pedido);
