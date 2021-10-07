@@ -1,5 +1,6 @@
 package com.francisco.ecommerce.model;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -16,6 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PostLoad;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import lombok.Getter;
@@ -24,6 +27,10 @@ import org.hibernate.Hibernate;
 
 @Getter
 @Setter
+@SecondaryTable(
+    name = "cliente_detalhe",
+    pkJoinColumns = @PrimaryKeyJoinColumn(name = "cliente_id")
+)
 @Entity
 @Table(name = "cliente")
 public class Cliente {
@@ -46,8 +53,12 @@ public class Cliente {
   @Transient
   private String primeiroNome;
 
+  @Column(table = "cliente_detalhe")
   @Enumerated(EnumType.STRING)
   private SexoCliente sexo;
+
+  @Column(name = "data_nascimento", table = "cliente_detalhe")
+  private LocalDate dataNascimento;
 
   @OneToMany(mappedBy = "cliente")
   private List<Pedido> pedidos;
