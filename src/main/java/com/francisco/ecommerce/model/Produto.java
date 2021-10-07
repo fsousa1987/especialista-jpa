@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -43,6 +44,9 @@ public class Produto {
 
     private BigDecimal preco;
 
+    @Lob
+    private byte[] foto;
+
     @ManyToMany
     @JoinTable(
         name = "produto_categoria",
@@ -68,4 +72,23 @@ public class Produto {
         joinColumns = @JoinColumn(name = "produto_id")
     )
     private List<Atributo> atributos;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Produto produto = (Produto) o;
+
+        return id.equals(produto.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }
