@@ -4,9 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,11 +12,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "pagamento_boleto")
-public class PagamentoBoleto {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+public class PagamentoBoleto extends EntidadeBaseInteger {
 
   @Column(name = "pedido_id")
   private Integer pedidoId;
@@ -29,23 +22,4 @@ public class PagamentoBoleto {
 
   @Column(name = "codigo_barras")
   private String codigoBarras;
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-
-    PagamentoBoleto that = (PagamentoBoleto) o;
-
-    return id.equals(that.id);
-  }
-
-  @Override
-  public int hashCode() {
-    return id.hashCode();
-  }
 }

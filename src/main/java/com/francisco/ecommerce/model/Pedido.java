@@ -11,9 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -34,11 +31,7 @@ import lombok.Setter;
 @EntityListeners({ GerarNotaFiscalListener.class, GenericoListener.class})
 @Entity
 @Table(name = "pedido")
-public class Pedido {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+public class Pedido extends EntidadeBaseInteger {
 
   @ManyToOne(optional = false)
   @JoinColumn(name = "cliente_id")
@@ -119,24 +112,5 @@ public class Pedido {
   @PostLoad
   public void aoCarregar() {
     System.out.println("Após carregar o Pedido.");
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-
-    Pedido pedido = (Pedido) o;
-
-    return id.equals(pedido.id);
-  }
-
-  @Override
-  public int hashCode() {
-    return id.hashCode();
   }
 }

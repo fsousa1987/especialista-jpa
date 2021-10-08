@@ -2,9 +2,6 @@ package com.francisco.ecommerce.model;
 
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -17,11 +14,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "categoria")
-public class Categoria {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+public class Categoria extends EntidadeBaseInteger {
 
   private String nome;
 
@@ -34,23 +27,4 @@ public class Categoria {
 
   @ManyToMany(mappedBy = "categorias")
   private List<Produto> produtos;
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-
-    Categoria categoria = (Categoria) o;
-
-    return id.equals(categoria.id);
-  }
-
-  @Override
-  public int hashCode() {
-    return id.hashCode();
-  }
 }

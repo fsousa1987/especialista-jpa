@@ -3,7 +3,6 @@ package com.francisco.ecommerce.model;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.MapsId;
@@ -16,11 +15,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "nota_fiscal")
-public class NotaFiscal {
-
-  @Id
-  @Column(name = "pedido_id")
-  private Integer id;
+public class NotaFiscal extends EntidadeBaseInteger {
 
   @MapsId
   @OneToOne(optional = false)
@@ -37,23 +32,4 @@ public class NotaFiscal {
 
   @Column(name = "data_emissao")
   private Date dataEmissao;
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-
-    NotaFiscal that = (NotaFiscal) o;
-
-    return id.equals(that.id);
-  }
-
-  @Override
-  public int hashCode() {
-    return id.hashCode();
-  }
 }
