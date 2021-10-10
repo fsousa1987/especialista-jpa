@@ -7,13 +7,17 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "categoria")
+@Table(
+    name = "categoria",
+    uniqueConstraints = { @UniqueConstraint(name = "unq_nome", columnNames = { "nome" }) }
+)
 public class Categoria extends EntidadeBaseInteger {
 
   private String nome;
