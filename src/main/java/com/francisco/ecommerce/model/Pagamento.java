@@ -1,5 +1,6 @@
 package com.francisco.ecommerce.model;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -27,6 +28,7 @@ public abstract class Pagamento extends EntidadeBaseInteger {
   @JoinColumn(name = "pedido_id")
   private Pedido pedido;
 
+  @Column(length = 30, nullable = false)
   @Enumerated(EnumType.STRING)
   private StatusPagamento status;
 }
