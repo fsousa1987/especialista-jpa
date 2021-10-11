@@ -2,6 +2,7 @@ package com.francisco.ecommerce.iniciandocomjpa;
 
 import com.francisco.ecommerce.EntityManagerTest;
 import com.francisco.ecommerce.model.Cliente;
+import com.francisco.ecommerce.model.SexoCliente;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +14,8 @@ public class PrimeiroCrudTest extends EntityManagerTest {
 
 //    cliente.setId(3);
     cliente.setNome("José Lucas");
+    cliente.setSexo(SexoCliente.MASCULINO);
+    cliente.setCpf("333");
 
     entityManager.getTransaction().begin();
     entityManager.persist(cliente);
@@ -35,8 +38,10 @@ public class PrimeiroCrudTest extends EntityManagerTest {
   public void atualizarRegistro() {
     Cliente cliente = new Cliente();
 
-//    cliente.setId(1);
+    cliente.setId(1);
     cliente.setNome("Fernando Medeiros Silva");
+    cliente.setCpf("000");
+    cliente.setSexo(SexoCliente.MASCULINO);
 
     entityManager.getTransaction().begin();
     Cliente clienteSalvo = entityManager.merge(cliente);

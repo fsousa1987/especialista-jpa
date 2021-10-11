@@ -5,6 +5,7 @@ import com.francisco.ecommerce.model.Cliente;
 import com.francisco.ecommerce.model.Pedido;
 import com.francisco.ecommerce.model.StatusPedido;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,9 +17,10 @@ public class CallbacksTest extends EntityManagerTest {
 
     Pedido pedido = new Pedido();
 
+    pedido.setDataCriacao(LocalDateTime.now());
     pedido.setCliente(cliente);
     pedido.setStatus(StatusPedido.AGUARDANDO);
-    pedido.setTotal(new BigDecimal(1225));
+    pedido.setTotal(BigDecimal.TEN);
 
     entityManager.getTransaction().begin();
 

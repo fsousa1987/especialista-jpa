@@ -5,6 +5,7 @@ import com.francisco.ecommerce.model.Cliente;
 import com.francisco.ecommerce.model.Pagamento;
 import com.francisco.ecommerce.model.PagamentoCartao;
 import com.francisco.ecommerce.model.Pedido;
+import com.francisco.ecommerce.model.SexoCliente;
 import com.francisco.ecommerce.model.StatusPagamento;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
@@ -16,6 +17,8 @@ public class HerancaTest extends EntityManagerTest {
   public void salvarCliente() {
     Cliente cliente = new Cliente();
     cliente.setNome("Fernanda Morais");
+    cliente.setSexo(SexoCliente.FEMININO);
+    cliente.setCpf("333");
 
     entityManager.getTransaction().begin();
     entityManager.persist(cliente);
