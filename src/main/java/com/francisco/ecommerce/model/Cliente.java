@@ -9,6 +9,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ForeignKey;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyColumn;
@@ -45,7 +46,11 @@ public class Cliente extends EntidadeBaseInteger {
   @ElementCollection
   @CollectionTable(
       name = "cliente_contato",
-      joinColumns = @JoinColumn(name = "cliente_id")
+      joinColumns = @JoinColumn(
+          name = "cliente_id",
+          nullable = false,
+          foreignKey = @ForeignKey(name = "fk_cliente_contato_cliente")
+      )
   )
   @MapKeyColumn(name = "tipo")
   @Column(name = "descricao")
