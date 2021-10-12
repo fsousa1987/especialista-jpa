@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -34,7 +35,11 @@ import lombok.Setter;
 public class Pedido extends EntidadeBaseInteger {
 
   @ManyToOne(optional = false)
-  @JoinColumn(name = "cliente_id")
+  @JoinColumn(
+      name = "cliente_id",
+      nullable = false,
+      foreignKey = @ForeignKey(name = "fk_pedido_cliente")
+  )
   private Cliente cliente;
 
   @OneToMany(mappedBy = "pedido")
