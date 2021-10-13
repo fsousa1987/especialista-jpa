@@ -27,7 +27,8 @@ import lombok.Setter;
 @Setter
 @SecondaryTable(
     name = "cliente_detalhe",
-    pkJoinColumns = @PrimaryKeyJoinColumn(name = "cliente_id")
+    pkJoinColumns = @PrimaryKeyJoinColumn(name = "cliente_id"),
+    foreignKey = @ForeignKey(name = "fk_cliente_detalhe_cliente")
 )
 @Entity
 @Table(
