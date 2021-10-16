@@ -1,6 +1,7 @@
 package com.francisco.ecommerce.operacoesemcascata;
 
 import com.francisco.ecommerce.EntityManagerTest;
+import com.francisco.ecommerce.model.Categoria;
 import com.francisco.ecommerce.model.Cliente;
 import com.francisco.ecommerce.model.ItemPedido;
 import com.francisco.ecommerce.model.ItemPedidoId;
@@ -16,6 +17,29 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class CascadeTypePersistTest extends EntityManagerTest {
+
+//  @Test
+  public void persistirProdutoComCategoria() {
+    Produto produto = new Produto();
+    produto.setDataCriacao(LocalDateTime.now());
+    produto.setPreco(BigDecimal.TEN);
+    produto.setNome("Fones de Ouvido");
+    produto.setDescricao("A melhor qualidade de som");
+
+    Categoria categoria = new Categoria();
+    categoria.setNome("Áudio");
+
+    produto.setCategorias(List.of(categoria)); // CascadeType.PERSIST
+
+    entityManager.getTransaction().begin();
+    entityManager.persist(produto);
+    entityManager.getTransaction().commit();
+
+    entityManager.clear();
+
+    Categoria categoriaVerificacao = entityManager.find(Categoria.class, categoria.getId());
+    Assertions.assertNotNull(categoriaVerificacao);
+  }
 
 //  @Test
   public void persistirPedidoComItens() {
@@ -43,8 +67,9 @@ public class CascadeTypePersistTest extends EntityManagerTest {
 
     entityManager.clear();
 
-    Assertions.assertNotNull(pedido);
-    Assertions.assertFalse(pedido.getItens().isEmpty());
+    Pedido pedidoVerificacao = entityManager.find(Pedido.class, pedido.getId());
+    Assertions.assertNotNull(pedidoVerificacao);
+    Assertions.assertFalse(pedidoVerificacao.getItens().isEmpty());
   }
 
   @Test
@@ -71,7 +96,8 @@ public class CascadeTypePersistTest extends EntityManagerTest {
 
     entityManager.clear();
 
-    Assertions.assertNotNull(pedido);
+    Pedido pedidoVerificacao = entityManager.find(Pedido.class, pedido.getId());
+    Assertions.assertNotNull(pedidoVerificacao);
   }
 
 //  @Test
@@ -94,6 +120,7 @@ public class CascadeTypePersistTest extends EntityManagerTest {
 
     entityManager.clear();
 
-    Assertions.assertNotNull(cliente);
+    Cliente clienteVerificacao = entityManager.find(Cliente.class, cliente.getId());
+    Assertions.assertNotNull(clienteVerificacao);
   }
 }
