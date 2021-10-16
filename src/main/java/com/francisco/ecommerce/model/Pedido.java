@@ -5,6 +5,7 @@ import com.francisco.ecommerce.listener.GerarNotaFiscalListener;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -79,8 +80,11 @@ public class Pedido extends EntidadeBaseInteger {
   public void calcularTotal() {
     if (itens != null) {
       total = itens.stream()
-          .map(ItemPedido::getPrecoProduto)
+          .map(item -> new BigDecimal(item.getQuantidade()).multiply(item.getPrecoProduto()))
           .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+    else {
+      total = BigDecimal.ZERO;
     }
   }
 
