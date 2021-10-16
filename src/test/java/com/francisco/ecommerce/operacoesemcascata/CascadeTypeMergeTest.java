@@ -1,18 +1,47 @@
 package com.francisco.ecommerce.operacoesemcascata;
 
 import com.francisco.ecommerce.EntityManagerTest;
+import com.francisco.ecommerce.model.Categoria;
 import com.francisco.ecommerce.model.Cliente;
 import com.francisco.ecommerce.model.ItemPedido;
 import com.francisco.ecommerce.model.ItemPedidoId;
 import com.francisco.ecommerce.model.Pedido;
 import com.francisco.ecommerce.model.Produto;
 import com.francisco.ecommerce.model.StatusPedido;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 
 public class CascadeTypeMergeTest extends EntityManagerTest {
 
-//  @Test
+  //  @Test
+  public void atualizarProdutoComCategoria() {
+    Produto produto = new Produto();
+    produto.setId(1);
+    produto.setDataUltimaAtualizacao(LocalDateTime.now());
+    produto.setPreco(new BigDecimal(500));
+    produto.setNome("Kindle");
+    produto.setDescricao("Agora com iluminação embutida ajustável.");
+
+    Categoria categoria = new Categoria();
+    categoria.setId(2);
+    categoria.setNome("Tablets");
+
+    produto.setCategorias(List.of(categoria)); // CascadeType.MERGE
+
+    entityManager.getTransaction().begin();
+    entityManager.merge(produto);
+    entityManager.getTransaction().commit();
+
+    entityManager.clear();
+
+    Categoria categoriaVerificacao = entityManager.find(Categoria.class, categoria.getId());
+    Assertions.assertEquals("Tablets", categoriaVerificacao.getNome());
+  }
+
+
+  //  @Test
   public void atualizarPedidoComItens() {
     Cliente cliente = entityManager.find(Cliente.class, 1);
     Produto produto = entityManager.find(Produto.class, 1);
@@ -43,7 +72,7 @@ public class CascadeTypeMergeTest extends EntityManagerTest {
     Assertions.assertEquals(3, (int) itemPedidoVerificacao.getQuantidade());
   }
 
-//  @Test
+  //  @Test
   public void atualizarItemPedidoComPedido() {
     Cliente cliente = entityManager.find(Cliente.class, 1);
     Produto produto = entityManager.find(Produto.class, 1);
