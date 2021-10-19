@@ -1,7 +1,6 @@
 package com.francisco.ecommerce.model;
 
 import java.math.BigDecimal;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;

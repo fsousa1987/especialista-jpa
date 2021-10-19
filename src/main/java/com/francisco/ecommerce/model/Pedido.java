@@ -5,7 +5,6 @@ import com.francisco.ecommerce.listener.GerarNotaFiscalListener;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -75,7 +74,7 @@ public class Pedido extends EntidadeBaseInteger {
     return StatusPedido.PAGO.equals(status);
   }
 
-//  @PrePersist
+  //  @PrePersist
 //  @PreUpdate
   public void calcularTotal() {
     if (itens != null) {
