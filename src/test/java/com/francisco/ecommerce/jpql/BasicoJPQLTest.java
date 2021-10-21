@@ -1,13 +1,29 @@
 package com.francisco.ecommerce.jpql;
 
 import com.francisco.ecommerce.EntityManagerTest;
+import com.francisco.ecommerce.model.Cliente;
 import com.francisco.ecommerce.model.Pedido;
+import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class BasicoJPQLTest extends EntityManagerTest {
+
+  @Test
+  public void selecionarUmAtributoParaRetorno() {
+    String jpql = "select p.nome from Produto p";
+
+    TypedQuery<String> typedQuery = entityManager.createQuery(jpql, String.class);
+    List<String> lista = typedQuery.getResultList();
+    Assertions.assertEquals("Câmera GoPro Hero 7", lista.get(0));
+
+    String jpqlCliente = "select p.cliente from Pedido p";
+    TypedQuery<Cliente> typedQueryCliente = entityManager.createQuery(jpqlCliente, Cliente.class);
+    List<Cliente> listaClientes = typedQueryCliente.getResultList();
+    Assertions.assertEquals(Cliente.class, listaClientes.get(0).getClass());
+  }
 
   @SuppressWarnings("CommentedOutCode")
   @Test
