@@ -12,6 +12,18 @@ import org.junit.jupiter.api.Test;
 public class BasicoJPQLTest extends EntityManagerTest {
 
   @Test
+  public void projetarOResultado() {
+    String jpql = "select id, nome from Produto";
+
+    TypedQuery<Object[]> typedQuery = entityManager.createQuery(jpql, Object[].class);
+    List<Object[]> lista = typedQuery.getResultList();
+
+    Assertions.assertEquals(2, lista.get(0).length);
+
+    lista.forEach(array -> System.out.println(array[0] + ", " + array[1]));
+  }
+
+  @Test
   public void selecionarUmAtributoParaRetorno() {
     String jpql = "select p.nome from Produto p";
 
