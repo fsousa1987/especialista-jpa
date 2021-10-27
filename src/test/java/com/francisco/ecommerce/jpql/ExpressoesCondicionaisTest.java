@@ -1,8 +1,10 @@
 package com.francisco.ecommerce.jpql;
 
 import com.francisco.ecommerce.EntityManagerTest;
+import com.francisco.ecommerce.model.Pedido;
 import com.francisco.ecommerce.model.Produto;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.TypedQuery;
 import org.junit.jupiter.api.Assertions;
@@ -10,6 +12,17 @@ import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("CommentedOutCode")
 public class ExpressoesCondicionaisTest extends EntityManagerTest {
+
+  @Test
+  public void usarMaiorMenorComDatas() {
+    String jpql = "select p from Pedido p where p.dataCriacao > :data";
+
+    TypedQuery<Pedido> typedQuery = entityManager.createQuery(jpql, Pedido.class);
+    typedQuery.setParameter("data", LocalDateTime.now().minusDays(2));
+
+    List<Pedido> lista = typedQuery.getResultList();
+    Assertions.assertFalse(lista.isEmpty());
+  }
 
   @Test
   public void usarMaiorMenor() {
