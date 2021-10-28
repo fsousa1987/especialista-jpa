@@ -13,6 +13,18 @@ import org.junit.jupiter.api.Test;
 public class BasicoJPQLTest extends EntityManagerTest {
 
   @Test
+  public void ordenarResultados() {
+    String jpql = "select c from Cliente c order by c.nome asc"; // desc
+
+    TypedQuery<Cliente> typedQuery = entityManager.createQuery(jpql, Cliente.class);
+
+    List<Cliente> lista = typedQuery.getResultList();
+    Assertions.assertFalse(lista.isEmpty());
+
+    lista.forEach(c -> System.out.println(c.getId() + ", " + c.getNome()));
+  }
+
+  @Test
   public void projetarNoDto() {
     String jpql = "select new com.francisco.ecommerce.dto.ProdutoDto(id, nome) from Produto";
 
