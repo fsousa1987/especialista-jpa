@@ -6,8 +6,23 @@ import javax.persistence.TypedQuery;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+@SuppressWarnings("CommentedOutCode")
 public class FuncoesTest extends EntityManagerTest {
 
+  @Test
+  public void aplicarFuncaoNumero() {
+    String jpql = "select abs(p.total), mod(p.id, 2), sqrt(p.total) from Pedido p " +
+        " where abs(p.total) > 1000";
+
+    TypedQuery<Object[]> typedQuery = entityManager.createQuery(jpql, Object[].class);
+
+    List<Object[]> lista = typedQuery.getResultList();
+    Assertions.assertFalse(lista.isEmpty());
+
+    lista.forEach(arr -> System.out.println(arr[0] + " | " + arr[1] + " | " + arr[2]));
+  }
+
+  /*
   @Test
   public void aplicarFuncaoData() {
     // TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
@@ -23,6 +38,7 @@ public class FuncoesTest extends EntityManagerTest {
 
     lista.forEach(arr -> System.out.println(arr[0] + " | " + arr[1] + " | " + arr[2]));
   }
+   */
 
 
   @Test
