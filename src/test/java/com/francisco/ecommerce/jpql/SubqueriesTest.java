@@ -2,12 +2,27 @@ package com.francisco.ecommerce.jpql;
 
 import com.francisco.ecommerce.EntityManagerTest;
 import com.francisco.ecommerce.model.Cliente;
+import com.francisco.ecommerce.model.Pedido;
 import java.util.List;
 import javax.persistence.TypedQuery;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class SubqueriesTest extends EntityManagerTest {
+
+  @Test
+  public void pesquisarComIN() {
+    String jpql = "select p from Pedido p where p.id in " +
+        " (select p2.id from ItemPedido i2 " +
+        "      join i2.pedido p2 join i2.produto pro2 where pro2.preco > 100)";
+
+    TypedQuery<Pedido> typedQuery = entityManager.createQuery(jpql, Pedido.class);
+
+    List<Pedido> lista = typedQuery.getResultList();
+    Assertions.assertFalse(lista.isEmpty());
+
+    lista.forEach(obj -> System.out.println("ID: " + obj.getId()));
+  }
 
   @SuppressWarnings("CommentedOutCode")
   @Test
